@@ -91,7 +91,84 @@ void countNode()
         count++;
         temp = temp->next;
     }
-    printf("the count is %d", count);
+    printf("the count is %d\n", count);
+}
+void  insertAtpos(int pos,int val)
+{
+    if(pos==0)
+    {
+        insertBegining(val);
+        return;
+    }
+   node *newnode=(node*)malloc(sizeof(node));
+   if(head==NULL)
+   {
+    printf("list is empty unable to insert");
+   }
+   else{
+    newnode->data=val;
+    node *temp=head;
+    for(int i=0;i<pos-1;i++)
+    {
+        temp=temp->next;
+        if(temp==NULL)
+        {
+            printf("iNVALID POSITION");
+            return;
+        }
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+   }
+}
+void deleteAtpos(int pos)
+{
+    if(pos==0)
+    {
+        deleteAtBegin();
+        return;
+    }
+    if(head==NULL)
+    {
+        printf("list is empty\n");
+        return;
+    }
+    else{
+        node *prev=NULL;
+        node *temp=head;
+        for(int i=0;i<pos;i++)
+        {
+            prev=temp;
+            temp=temp->next;
+            if(temp==NULL)
+            {
+                printf("invalid position\n");
+                return;
+            }
+        }
+        prev->next=temp->next;
+    }
+}
+void search(int val)
+{
+    if(head==NULL)
+    {
+        printf("the list is empty\n");
+        return;
+    }
+    else{
+        node *temp=head;
+        while(temp!=NULL)
+        {
+           if(temp->data==val)
+           {
+            printf("is present");
+            return;
+           }
+           temp=temp->next;
+        }
+    }
+    printf("not present");
 }
 int main()
 {
@@ -99,11 +176,14 @@ int main()
     insertBegining(2);
     insertBegining(3);
     insertAtEnd(4);
+    insertAtpos(4, 5);
     // deleteAtBegin();
     // deleteAtBegin();
     // deleteAtEnd();
+    // deleteAtpos(5);
+    search(6);
     display();
-    countNode();
+    // countNode();
 
     return 0;
 }
